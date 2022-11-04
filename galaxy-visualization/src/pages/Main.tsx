@@ -43,13 +43,20 @@ interface onlySmsType {
 }
 
 export default function Main() {
+  // 연도별 문자 횟수
   const sms_2019 = useRef<number[]>([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const sms_2020 = useRef<number[]>([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const sms_2021 = useRef<number[]>([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const sms_2022 = useRef<number[]>([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  // 연도별 전화 횟수
   const call_2020 = useRef<number[]>([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const call_2021 = useRef<number[]>([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const call_2022 = useRef<number[]>([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  // 연락 목록
+  const smsAddresses = useRef<string[]>([]);
+  const callAddresses = useRef<string[]>([]);
+  const smsAddressCount = useRef<any>();
+  const callAddressCount = useRef<any>();
 
   onlySms.sms.map((sms: smsType) => {
     if (sms._readable_date.slice(0, 4) === '2019') {
@@ -61,6 +68,7 @@ export default function Main() {
     } else {
       sms_2022.current[Number(sms._readable_date.slice(6, 8)) - 1] += 1;
     }
+    smsAddresses.current.push(sms._address);
   });
   call.call.map((call: callType) => {
     if (call._readable_date.slice(0, 4) === '2020') {
@@ -70,15 +78,37 @@ export default function Main() {
     } else {
       call_2022.current[Number(call._readable_date.slice(6, 8)) - 1] += 1;
     }
+    callAddresses.current.push(call._number);
   });
 
-  console.log('sms_2019 : ' + sms_2019.current);
-  console.log('sms_2020 : ' + sms_2020.current);
-  console.log('sms_2021 : ' + sms_2021.current);
-  console.log('sms_2022 : ' + sms_2022.current);
-  console.log('call_2020 : ' + call_2020.current);
-  console.log('call_2021 : ' + call_2021.current);
-  console.log('call_2022 : ' + call_2022.current);
+  smsAddressCount.current = smsAddresses.current.reduce(function (
+    smsAddress: any,
+    smsAddressNumber: string
+  ) {
+    if (smsAddressNumber in smsAddress) {
+      smsAddress[smsAddressNumber]++;
+    } else {
+      smsAddress[smsAddressNumber] = 1;
+    }
+    return smsAddress;
+  },
+  {});
+
+  callAddressCount.current = callAddresses.current.reduce(function (
+    callAddress: any,
+    callAddressNumber: string
+  ) {
+    if (callAddressNumber in callAddress) {
+      callAddress[callAddressNumber]++;
+    } else {
+      callAddress[callAddressNumber] = 1;
+    }
+    return callAddress;
+  },
+  {});
+
+  console.log(smsAddressCount.current);
+  console.log(callAddressCount.current);
 
   return <p>d</p>;
 }
