@@ -109,6 +109,10 @@ interface callAddressCountType {
 }
 
 export default function Main() {
+  // 비율 클릭 여부
+  const [isClicked, setIsClicked] = useState<boolean>(false);
+  // select month, year
+  const [month, setMonth] = useState<string>();
   const [year, setYear] = useState<string>('2019');
   // 연도와 달별로 구분
   const sms_2019_Month = useRef<smsMonthType>({
@@ -420,8 +424,12 @@ export default function Main() {
       Dec: [],
     },
   });
+  // 비율을 보기 위한 주소와 연락 횟수
+  const smsAddressCount_Address = useRef<string[]>([]);
+  const smsAddressCount_Num = useRef<number[]>([]);
+
   useEffect(() => {
-    onlySms.sms.map((sms: smsType) => {
+    onlySms.sms.forEach((sms: smsType) => {
       if (sms._readable_date.slice(0, 4) === '2019') {
         sms_2019.current[Number(sms._readable_date.slice(6, 8)) - 1] += 1;
         if (Number(sms._readable_date.slice(6, 8)) === 1) {
@@ -580,7 +588,7 @@ export default function Main() {
         }
       }
     });
-    call.call.map((call: callType) => {
+    call.call.forEach((call: callType) => {
       if (call._readable_date.slice(0, 4) === '2020') {
         call_2020.current[Number(call._readable_date.slice(6, 8)) - 1] += 1;
         if (Number(call._readable_date.slice(6, 8)) === 1) {
@@ -1802,14 +1810,355 @@ export default function Main() {
       {});
   }, []);
 
-  const smsAddressCount_2019_Arr = Object.entries(
-    smsAddressCount.current.smsAddressCount_2021.Jan
-  );
-
-  console.log(sms_2020_Month.current);
-  console.log(sms_2020.current);
-  console.log(smsAddresses_2020.current);
-  console.log(smsAddressCount.current.smsAddressCount_2021);
+  useEffect(() => {
+    smsAddressCount_Address.current = [];
+    smsAddressCount_Num.current = [];
+    if (year === '2019') {
+      if (month === '1') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2019.Jan
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '2') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2019.Feb
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '3') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2019.Mar
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '4') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2019.Apr
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '5') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2019.May
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '6') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2019.June
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '7') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2019.July
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '8') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2019.Aug
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '9') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2019.Sep
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '10') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2019.Oct
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '11') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2019.Nov
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2019.Dec
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      }
+    } else if (year === '2020') {
+      if (month === '1') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2020.Jan
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '2') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2020.Feb
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '3') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2020.Mar
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '4') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2020.Apr
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '5') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2020.May
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '6') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2020.June
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '7') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2020.July
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '8') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2020.Aug
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '9') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2020.Sep
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '10') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2020.Oct
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '11') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2020.Nov
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2020.Dec
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      }
+    } else if (year === '2021') {
+      if (month === '1') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2021.Jan
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '2') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2021.Feb
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '3') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2021.Mar
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '4') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2021.Apr
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '5') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2021.May
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '6') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2021.June
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '7') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2021.July
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '8') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2021.Aug
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '9') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2021.Sep
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '10') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2021.Oct
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '11') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2021.Nov
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2021.Dec
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      }
+    } else {
+      if (month === '1') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2022.Jan
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '2') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2022.Feb
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '3') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2022.Mar
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '4') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2022.Apr
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '5') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2022.May
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '6') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2022.June
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '7') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2022.July
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '8') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2022.Aug
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '9') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2022.Sep
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '10') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2022.Oct
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else if (month === '11') {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2022.Nov
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      } else {
+        Object.entries(
+          smsAddressCount.current.smsAddressCount_2022.Dec
+        ).forEach(([key, value]) => {
+          smsAddressCount_Address.current.push(key);
+          smsAddressCount_Num.current.push(Number(value));
+        });
+      }
+    }
+  }, [year, month]);
 
   return (
     <Container>
@@ -1824,76 +2173,173 @@ export default function Main() {
         <option value={2021}>2021</option>
         <option value={2022}>2022</option>
       </select>
-      <ApexCharts
-        type="bar"
-        series={[
-          {
-            name: 'sms',
-            data:
-              year === '2019'
-                ? sms_2019.current
-                : year === '2020'
-                ? sms_2020.current
-                : year === '2021'
-                ? sms_2021.current
-                : sms_2022.current,
-          },
-          {
-            name: 'call',
-            data:
-              year === '2019'
-                ? call_2019.current
-                : year === '2020'
-                ? call_2020.current
-                : year === '2021'
-                ? call_2021.current
-                : call_2022.current,
-          },
-        ]}
-        options={{
-          chart: {
-            height: 350,
-            type: 'line',
-            zoom: {
+      {isClicked && (
+        <select
+          value={month}
+          onChange={(e) => {
+            setMonth(e.target.value);
+          }}
+        >
+          <option value={1}>1월</option>
+          <option value={2}>2월</option>
+          <option value={3}>3월</option>
+          <option value={4}>4월</option>
+          <option value={5}>5월</option>
+          <option value={6}>6월</option>
+          <option value={7}>7월</option>
+          <option value={8}>8월</option>
+          <option value={9}>9월</option>
+          <option value={10}>10월</option>
+          <option value={11}>11월</option>
+          <option value={12}>12월</option>
+        </select>
+      )}
+      {isClicked ? (
+        <button
+          onClick={() => {
+            setIsClicked(!isClicked);
+          }}
+        >
+          SMS & CALL
+        </button>
+      ) : (
+        <button
+          onClick={() => {
+            setIsClicked(!isClicked);
+          }}
+        >
+          비율
+        </button>
+      )}
+      {isClicked ? (
+        <ApexCharts
+          type="donut"
+          series={smsAddressCount_Num.current}
+          options={{
+            chart: {
+              height: 350,
+              type: 'line',
+              zoom: {
+                enabled: false,
+              },
+            },
+            dataLabels: {
+              enabled: true,
+              formatter: function (val) {
+                return Math.round(Number(val)) + '%';
+              },
+            },
+            stroke: {
+              curve: 'straight',
+            },
+            title: {
+              text: 'User Data',
+              align: 'left',
+            },
+            grid: {
+              row: {
+                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5,
+              },
+            },
+            labels: smsAddressCount_Address.current,
+            plotOptions: {
+              pie: {
+                donut: {
+                  labels: {
+                    show: true,
+                    total: {
+                      showAlways: true,
+                      show: true,
+                      label: `${year}년 ${month}월 SMS`,
+                      fontSize: '12px',
+                      color: 'red',
+                    },
+                    value: {
+                      fontSize: '22px',
+                      show: true,
+                      color: 'blue',
+                    },
+                  },
+                },
+              },
+            },
+          }}
+          height={750}
+          width={1300}
+        />
+      ) : (
+        <ApexCharts
+          type="bar"
+          series={[
+            {
+              name: 'sms',
+              data:
+                year === '2019'
+                  ? sms_2019.current
+                  : year === '2020'
+                  ? sms_2020.current
+                  : year === '2021'
+                  ? sms_2021.current
+                  : sms_2022.current,
+            },
+            {
+              name: 'call',
+              data:
+                year === '2019'
+                  ? call_2019.current
+                  : year === '2020'
+                  ? call_2020.current
+                  : year === '2021'
+                  ? call_2021.current
+                  : call_2022.current,
+            },
+          ]}
+          options={{
+            chart: {
+              height: 350,
+              type: 'line',
+              zoom: {
+                enabled: false,
+              },
+            },
+            dataLabels: {
               enabled: false,
             },
-          },
-          dataLabels: {
-            enabled: false,
-          },
-          stroke: {
-            curve: 'straight',
-          },
-          title: {
-            text: 'User Data',
-            align: 'left',
-          },
-          grid: {
-            row: {
-              colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-              opacity: 0.5,
+            stroke: {
+              curve: 'straight',
             },
-          },
-          xaxis: {
-            categories: [
-              'Jan',
-              'Feb',
-              'Mar',
-              'Apr',
-              'May',
-              'June',
-              'July',
-              'Aug',
-              'Sep',
-              'Oct',
-              'Nov',
-              'Dec',
-            ],
-          },
-        }}
-        height={750}
-        width={1300}
-      />
+            title: {
+              text: 'User Data',
+              align: 'left',
+            },
+            grid: {
+              row: {
+                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5,
+              },
+            },
+            xaxis: {
+              categories: [
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'June',
+                'July',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec',
+              ],
+            },
+          }}
+          height={750}
+          width={1300}
+        />
+      )}
     </Container>
   );
 }
@@ -1930,6 +2376,51 @@ const Container = styled.section`
     }
     &:disabled {
       opacity: 0.5;
+    }
+  }
+  button {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #4286f4;
+
+    margin: 0;
+    padding: 0.5rem 1rem;
+
+    -family: 'Noto Sans KR', sans-serif;
+    -size: 1rem;
+    -weight: 400;
+    text-align: center;
+    text-decoration: none;
+
+    border: none;
+    border-radius: 4px;
+
+    display: inline-block;
+    width: auto;
+
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+    cursor: pointer;
+
+    transition: 0.5s;
+    right: 150px;
+
+    &:active {
+      background: skyblue;
+      outline: 0;
+    }
+    &:disabled {
+      opacity: 0.5;
+    }
+    p {
+      -family: 'Pretendard';
+      -style: normal;
+      -weight: 500;
+      -size: 16px;
+      line-height: 24px;
+      color: #ffffff;
     }
   }
 `;
