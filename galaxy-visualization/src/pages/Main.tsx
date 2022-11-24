@@ -108,11 +108,6 @@ interface callAddressCountType {
   callAddressCount_2021: addressCountMonthType;
   callAddressCount_2022: addressCountMonthType;
 }
-interface sentimentType {
-  negative: number;
-  positive: number;
-  neutral: number;
-}
 export default function Main() {
   // 비율 클릭 여부
   const [isClicked, setIsClicked] = useState<boolean>(false);
@@ -1092,61 +1087,6 @@ export default function Main() {
     useState<number>(0);
   const [bodySentimentDecNeutral, setBodySentimentDecNeutral] =
     useState<number>(0);
-  // const bodySentimentFeb = useRef<sentimentType>({
-  //   negative: 0,
-  //   positive: 0,
-  //   neutral: 0,
-  // });
-  // const bodySentimentMar = useRef<sentimentType>({
-  //   negative: 0,
-  //   positive: 0,
-  //   neutral: 0,
-  // });
-  // const bodySentimentApr = useRef<sentimentType>({
-  //   negative: 0,
-  //   positive: 0,
-  //   neutral: 0,
-  // });
-  // const bodySentimentMay = useRef<sentimentType>({
-  //   negative: 0,
-  //   positive: 0,
-  //   neutral: 0,
-  // });
-  // const bodySentimentJune = useRef<sentimentType>({
-  //   negative: 0,
-  //   positive: 0,
-  //   neutral: 0,
-  // });
-  // const bodySentimentJuly = useRef<sentimentType>({
-  //   negative: 0,
-  //   positive: 0,
-  //   neutral: 0,
-  // });
-  // const bodySentimentAug = useRef<sentimentType>({
-  //   negative: 0,
-  //   positive: 0,
-  //   neutral: 0,
-  // });
-  // const bodySentimentSep = useRef<sentimentType>({
-  //   negative: 0,
-  //   positive: 0,
-  //   neutral: 0,
-  // });
-  // const bodySentimentOct = useRef<sentimentType>({
-  //   negative: 0,
-  //   positive: 0,
-  //   neutral: 0,
-  // });
-  // const bodySentimentNov = useRef<sentimentType>({
-  //   negative: 0,
-  //   positive: 0,
-  //   neutral: 0,
-  // });
-  // const bodySentimentDec = useRef<sentimentType>({
-  //   negative: 0,
-  //   positive: 0,
-  //   neutral: 0,
-  // });
 
   const [bodyJanNum, setBodyJanNum] = useState<number>(0);
   const [bodyFebNum, setBodyFebNum] = useState<number>(0);
@@ -1827,7 +1767,6 @@ export default function Main() {
           series={smsAddressCount_Num}
           options={{
             chart: {
-              height: 350,
               type: 'line',
               zoom: {
                 enabled: false,
@@ -1875,8 +1814,8 @@ export default function Main() {
               },
             },
           }}
-          height={750}
-          width={1300}
+          height={500}
+          width={1000}
         />
       ) : (
         <ApexCharts
@@ -1950,8 +1889,8 @@ export default function Main() {
           width={1000}
         />
       )}
-      {sentimentClicked && (
-        <p>
+      {sentimentClicked && !isClicked ? (
+        <Sentiment>
           1월 부정 : {bodySentimentJanNegative / bodyJanNum}, 긍정 :{' '}
           {bodySentimentJanPositive / bodyJanNum}, 중립 :{' '}
           {bodySentimentJanNeutral / bodyJanNum}
@@ -1999,8 +1938,8 @@ export default function Main() {
           12월 부정 : {bodySentimentDecNegative / bodyDecNum}, 긍정 :{' '}
           {bodySentimentDecPositive / bodyDecNum}, 중립 :{' '}
           {bodySentimentDecNeutral / bodyDecNum}
-        </p>
-      )}
+        </Sentiment>
+      ) : null}
     </Container>
   );
 }
@@ -2101,4 +2040,10 @@ const CountButton = styled.button`
 const SentimentButton = styled.button`
   width: 40px;
   height: 40px;
+`;
+const Sentiment = styled.section`
+  width: 100%;
+  height: 150px;
+  overflow-y: scroll;
+  border: 1px solid;
 `;
