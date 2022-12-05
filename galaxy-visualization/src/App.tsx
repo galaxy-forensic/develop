@@ -1,8 +1,15 @@
-import React from "react";
-import Main from "./pages/Main";
+import React from 'react';
+import Main from './pages/Main';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
-  return <Main />;
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Main />} />
+      </Routes>
+    </>
+  );
 }
 
 export default App;
